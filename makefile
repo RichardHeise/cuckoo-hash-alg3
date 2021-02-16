@@ -8,7 +8,7 @@ OBJECTS = main.o myht.o
 BINARIES = myht
 
 all: $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(BINARIES)
+	$(CC) $(OBJECTS) -o $(BINARIES) -lm
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
