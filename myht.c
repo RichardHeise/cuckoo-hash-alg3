@@ -31,3 +31,30 @@ void printTable(int table[]){
 	}
 
 }
+
+int search(int key, int table_1[], int table_2[]) {
+
+	int k;
+	k = key % M;
+
+	if (table_1[k] != FLAG) {
+		if (table_1[k] == key) {
+			return k;
+		} else {
+			int j;
+			j = floor(M * (key * 0.9 - floor(key * 0.9)));
+
+			return j;
+		}
+	} 
+
+	return FLAG;
+}
+
+void initTable (int table[]) {
+	int i;
+
+	for (i = 0; i < M; i++) {
+		table[i] = FLAG;
+	}
+}

@@ -4,7 +4,10 @@
 
 int main(){
 
-	int table_1[M] = {FLAG}, table_2[M] = {FLAG};
+	int table_1[M], table_2[M];
+
+	initTable(table_1);
+	initTable(table_2);
 
 	insert(10, table_1, table_2);
 	insert(22, table_1, table_2);
@@ -12,6 +15,10 @@ int main(){
 	insert(15, table_1, table_2);
 	insert(59, table_1, table_2);
 
+	int test = search(59, table_1, table_2);
+	printf("%d\n", test);
+
+	printf("\n");
 	printTable(table_1);
 	printTable(table_2);
 
