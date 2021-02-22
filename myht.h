@@ -2,6 +2,7 @@
 #define FLAG -5
 #define MAX 40
 #define OPEN -4
+#define INVALID_OPCODE -2
 
 /*
  * Function to initiate a hash table

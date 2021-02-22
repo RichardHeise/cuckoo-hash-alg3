@@ -1,6 +1,7 @@
-#include<stdio.h>
-#include"myht.h"
-#include<stdlib.h>
+#include <stdio.h>
+#include "myht.h"
+#include <stdlib.h>
+#include <string.h>
 
 int main(){
 
@@ -9,13 +10,24 @@ int main(){
 	initTable(table_1);
 	initTable(table_2);
 
-	insert(10, table_1, table_2);
-	insert(22, table_1, table_2);
-	insert(4, table_1, table_2);
-	insert(15, table_1, table_2);
-	insert(59, table_1, table_2);
+	char *buffer = malloc(50 * sizeof(char));
+	for(;fgets(buffer,50,stdin);){
+
+		char *code=strtok(buffer," ");
+		int key = atoi( strtok(NULL, " "));
+
+		if(!strcmp("i",code))
+			insert(key,table_1,table_2);
+		else if (!strcmp("r",code))
+			remover(key,table_1,table_2);
+		else{
+			perror("Invalid operation code\n");
+			exit(INVALID_OPCODE);
+		}
+
+	}
 
 	printTable(table_1, table_2);
-
 	return 0;
+
 }

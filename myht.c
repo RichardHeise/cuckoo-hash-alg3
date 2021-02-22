@@ -78,7 +78,7 @@ void printTable(int table_1[], int table_2[]){
 
 	qsort(output, j, sizeof(char*), Sort_aux);
 
-	for(i = 1; i < j; i++) {
+	for(i = 0; i < j; i++) {
 		printf("%s\n", output[i]);
 	}
 }
@@ -104,15 +104,13 @@ int remover(int key, int table_1[], int table_2[]) {
 	int k;
 	k = hash_2(key); /* find the position where key should be on table 2*/
 
-	if (table_2[k] != OPEN ) { /*if position is ocupied*/
-		if (table_2[k] == key) {
-			table_2[k] = FLAG;
-			return 1;
-		} else if ( table_1[hash_1(key)] == key  ) {
-			table_1[hash_1(key)] = FLAG;
-			return 1;
-		}
-	} 
+	if (table_2[k] == key) {
+		table_2[k] = FLAG;
+		return 1;
+	} else if ( table_1[hash_1(key)] == key  ) {
+		table_1[hash_1(key)] = FLAG;
+		return 1;
+	}
 
 	return 0;
 }
