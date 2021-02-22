@@ -1,5 +1,6 @@
 #define M 11
 #define FLAG -5
+#define MAX 40
 #define OPEN -4
 
 /*
@@ -27,13 +28,13 @@ int hash_2(int key);
 int insert(int key, int table_1[], int table_2[]);
 
 
-void printTable(int table[], int t);
+void printTable(int table[], int table_2[]);
 
 /*
  * Function to search for values in the hash tables
  * Receives an int key and the first table.
  */
-int search(int key, int table_1[], int *table);
+int search(int key, int table_1[], int table_2[]);
 
 
 /*

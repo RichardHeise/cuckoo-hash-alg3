@@ -1,5 +1,7 @@
 #include<math.h>
+#include<string.h>
 #include<stdio.h>
+#include<stdlib.h>
 #include"myht.h"
 
 void initTable(int table[]) {
@@ -39,27 +41,57 @@ int insert(int key, int table_1[], int table_2[]) {
 	return k;
 }
 
-void printTable(int table[], int t){
-
-	int i;
-	for(i = 0; i < M; i++){
-		if(table[i] != FLAG && table[i] != OPEN)
-			printf("%d,T%d,%d\n",table[i], t, i);
-	}
-
+int parseKey(char* str) {
+	char aux_str[MAX];
+	strcpy(aux_str, str);
+	return atoi(strtok(aux_str, ","));
 }
 
-int search(int key, int table_1[], int *table) {
+static int Sort_aux(const void *a, const void *b) {
+	int aux_a = parseKey(*(char **)a);
+	int aux_b = parseKey(*(char **)b);
+	if (aux_a < aux_b) return -1;
+	if (aux_a > aux_b) return 1;
+	return 0;
+}
+
+void printTable(int table_1[], int table_2[]){
+
+	char** output = malloc(sizeof(char) * M * 2);
+
+	int i;
+	int j = 0;
+	for(i = 0; i < M; i++){
+		if(table_1[i] != FLAG && table_1[i] != OPEN) {
+			char *aux = malloc(sizeof(char) * MAX);
+			snprintf(aux, MAX, "%d,T1,%d", table_1[i], i);
+			output[j] = aux;
+			j++;
+		}
+		if(table_2[i] != FLAG && table_2[i] != OPEN) {
+			char *aux = malloc(sizeof(char) * MAX);
+			snprintf(aux, MAX, "%d,T2,%d", table_2[i], i);
+			output[j] = aux;
+			j++;
+		}
+	}
+
+	qsort(output, j, sizeof(char*), Sort_aux);
+
+	for(i = 1; i < j; i++) {
+		printf("%s\n", output[i]);
+	}
+}
+
+int search(int key, int table_1[], int table_2[]) {
 
 	int k;
 	k = hash_1(key); /* find the position where key should be on table 1*/
 
 	if (table_1[k] != OPEN ) { /*if position is ocupied*/
 		if (table_1[k] == key) {
-			*table = 1;
 			return k;
-		} else {
-			*table = 2;
+		} else if ( table_2[hash_2(key)] == key) {
 			return hash_2(key); /*return pos on table 2*/
 		}
 	} 
@@ -70,14 +102,14 @@ int search(int key, int table_1[], int *table) {
 int remover(int key, int table_1[], int table_2[]) {
 
 	int k;
-	k = hash_2(key); /* find the position where key should be on table 1*/
+	k = hash_2(key); /* find the position where key should be on table 2*/
 
 	if (table_2[k] != OPEN ) { /*if position is ocupied*/
 		if (table_2[k] == key) {
 			table_2[k] = FLAG;
 			return 1;
 		} else if ( table_1[hash_1(key)] == key  ) {
-			table_1[hash_1(key)] = FLAG; /*return pos on table 2*/
+			table_1[hash_1(key)] = FLAG;
 			return 1;
 		}
 	} 
