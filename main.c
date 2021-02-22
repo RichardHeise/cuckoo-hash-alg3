@@ -15,12 +15,14 @@ int main(){
 	insert(15, table_1, table_2);
 	insert(59, table_1, table_2);
 
-	int test = search(59, table_1, table_2);
+	int table;
+	int test = search(4, table_1, &table);
+	test = search(59, table_1, &table);
 	printf("%d\n", test);
 
 	printf("\n");
-	printTable(table_1);
-	printTable(table_2);
+	printTable(table_1, 1);
+	printTable(table_2, 2);
 
 	return 0;
 }
