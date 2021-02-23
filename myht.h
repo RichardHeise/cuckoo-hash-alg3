@@ -3,6 +3,8 @@
 #define MAX 40
 #define OPEN -4
 #define INVALID_OPCODE -2
+#define MEMORY_ERROR -3
+#define SUCCESS 1
 
 /*
  * Function to initiate a hash table
@@ -28,8 +30,11 @@ int hash_2(int key);
  */
 int insert(int key, int table_1[], int table_2[]);
 
-
-void printTable(int table[], int table_2[]);
+/* 
+ * Function to print table in order
+ * Receives both tables
+ */
+void printTable(int table_1[], int table_2[]);
 
 /*
  * Function to search for values in the hash tables

@@ -7,9 +7,11 @@ int main(){
 
 	int table_1[M], table_2[M];
 
+	// initialize tables
 	initTable(table_1);
 	initTable(table_2);
 
+	// parse inputs
 	char *buffer = malloc(50 * sizeof(char));
 	for(;fgets(buffer,50,stdin);){
 
@@ -28,6 +30,6 @@ int main(){
 	}
 
 	printTable(table_1, table_2);
-	return 0;
+	return SUCCESS;
 
 }
